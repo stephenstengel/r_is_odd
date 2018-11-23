@@ -3,7 +3,7 @@
  * 
  * Copyright 2018 Stephen Stengel <stephen.stengel@cwu.edu>
  * License: GPLv3
- * git: https://notabug.org/Ondapufo/r_is_odd
+ * github: https://github.com/stephenstengel/r_is_odd/
  * 
  */
 
