@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
 int r_is_odd(int number_to_check);
 
@@ -53,35 +54,44 @@ int r_is_odd(int number_to_check)
  * and just after will be close enough for most anything I think.
  * 
  * TODO: 	What is the difference between time(NULL) and time(&t) ?
+ *              2019 Oct 17:
+ *              &t is the address of the variable t that was created by the
+ *              declaration: time_t t; It is whatever was in memory at the
+ *              place where t was assigned to.
  * 
  * 			Difference between rand() random() ?
- * 
- * 			How to make a slot machine looking character? How to make it
- * 			randomly change many times a second until some action or after a
- * 			certian time? Need to remove one thing from stdout? Clear screen?
+ *              2019 oct 17:
+ *              Aparrently, rand() and srand() are ANSI.
+ *              random() and srandom are unix.
+ *https://stackoverflow.com/questions/18726102/what-difference-between-rand-and-random-functions
  * 
  * 			Why do I get a compiler warning for using sleep() ?
- * 
- * 			Make a small for() loop to count results to check randomness.
+ *              2019 oct 17:
+ *              Because the prototype for sleep() is in unistd.h and I did not
+ *              include it. It still worked though!
  */
 int main(int argc, char **argv)
 {
 	//time_t t;
-	
 	//srand(time(&t));
 	//srandom(time(&t));
 	
-	srand(time(NULL));
+	srand(time(NULL)); //the good version
+
 	//srandom(time(NULL));
 	
 	int TEST_NUMBER_EVEN = 6;
 	int TEST_NUMBER_ODD = 7;
 	
-	printf("%d %d\n", r_is_odd(TEST_NUMBER_EVEN), r_is_odd(TEST_NUMBER_ODD));
+	for (int i = 0; i < 1000; i++)
+    {
+        printf("%d %d\n", r_is_odd(TEST_NUMBER_EVEN), r_is_odd(TEST_NUMBER_ODD));
+    }
+    
 	
 	//sleep(3);
 	
-	printf("Current UNIX time in seconds: %lu", time(NULL));
+	printf("Current UNIX time in seconds: %lu\n", time(NULL));
 	
 	return 0;
 }
